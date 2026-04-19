@@ -2,7 +2,7 @@
 
 Slidev addon exposing an `<animated-text>` component powered by [Tegaki](https://gkurt.com/tegaki/).
 
-See the example here [andreas-taranetz.github.io/slidev-addon-animated-text/](andreas-taranetz.github.io/slidev-addon-animated-text/)
+See the example here [andreas-taranetz.github.io/slidev-addon-animated-text/](https://andreas-taranetz.github.io/slidev-addon-animated-text/)
 
 ## Install
 
@@ -90,23 +90,3 @@ Advanced `time` override example:
   :time="{ mode: 'uncontrolled', initialTime: 0.4, delay: 0.3, speed: 1.2, loop: true }"
 />
 ```
-
-## Local Preview
-
-Use the addon locally while developing it:
-
-```yaml
----
-addons:
-  - "@/"
----
-```
-
-Then run:
-
-```bash
-pnpm install
-pnpm dev
-```
-
-The package publishes source files directly. Slidev compiles the addon when it is consumed.

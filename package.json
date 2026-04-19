@@ -20,6 +20,7 @@
     "type": "git",
     "url": "https://github.com/andreas-taranetz/slidev-addon-animated-text.git"
   },
+  "homepage": "https://andreas-taranetz.github.io/slidev-addon-animated-text",
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
