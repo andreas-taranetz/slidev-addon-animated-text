@@ -35,13 +35,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build package
-        run: pnpm build
-
       - name: Set package version from release tag
         run: pnpm pkg set version="${RELEASE_TAG#v}"
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
 
+      - name: Build package
+        run: pnpm build
+
       - name: Publish package to npm
-        run: pnpm publish --no-git-checks --provenance
+        run: npm publish

@@ -6,11 +6,13 @@ import italiannoBundle from 'tegaki/fonts/italianno';
 import parisienneBundle from 'tegaki/fonts/parisienne';
 import tangerineBundle from 'tegaki/fonts/tangerine';
 
+const FONT_BASE_URL = `${import.meta.env.BASE_URL}fonts/`;
+
 const FONT_SOURCES = {
-  caveat: { bundle: caveatBundle, fontUrl: '/fonts/caveat.ttf' },
-  italianno: { bundle: italiannoBundle, fontUrl: '/fonts/italianno.ttf' },
-  parisienne: { bundle: parisienneBundle, fontUrl: '/fonts/parisienne.ttf' },
-  tangerine: { bundle: tangerineBundle, fontUrl: '/fonts/tangerine.ttf' },
+  caveat: { bundle: caveatBundle, fontUrl: `${FONT_BASE_URL}caveat.ttf` },
+  italianno: { bundle: italiannoBundle, fontUrl: `${FONT_BASE_URL}italianno.ttf` },
+  parisienne: { bundle: parisienneBundle, fontUrl: `${FONT_BASE_URL}parisienne.ttf` },
+  tangerine: { bundle: tangerineBundle, fontUrl: `${FONT_BASE_URL}tangerine.ttf` },
 };
 
 const props = defineProps({
