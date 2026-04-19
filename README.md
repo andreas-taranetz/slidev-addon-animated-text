@@ -50,7 +50,6 @@ The component exposes the common Tegaki renderer options plus a few addon-level 
 | --- | --- | --- | --- |
 | `text` | `string` | required | Text to render |
 | `font` | `'caveat' \| 'italianno' \| 'tangerine' \| 'parisienne'` | `caveat` | Built-in Tegaki font bundle |
-| `font-size` | `string` | `48px` | Applied to the Tegaki container |
 | `speed` | `number` | `1` | Simple playback speed control |
 | `loop` | `boolean` | `false` | Loop the animation |
 | `delay` | `number` | `0` | Delay before animation start in seconds |
@@ -65,13 +64,14 @@ The component exposes the common Tegaki renderer options plus a few addon-level 
 ## Examples
 
 ```html
-<animated-text
-  text="Fast loop"
-  font="tangerine"
-  font-size="56px"
-  :speed="2"
-  :loop="true"
-/>
+<h2 style="font-size: 56px; line-height: 1;">
+  <animated-text
+    text="Fast loop"
+    font="tangerine"
+    :speed="2"
+    :loop="true"
+  />
+</h2>
 ```
 
 ```html

@@ -2,7 +2,7 @@
 addons:
   - "@/"
 theme: default
-layout: center
+layout: cover
 class: text-center
 title: Animated Text Addon
 info: |
@@ -16,13 +16,7 @@ comark: true
 duration: 10min
 ---
 
-<h1>
-  <animated-text
-    text="Animated text"
-    font-size="88px"
-    :speed="2.3"
-  />
-</h1>
+# <animated-text text="Animated text" :speed="2.3" />
 
 <p class="text-lg">
   Tegaki-powered animated text for Slidev.
@@ -35,7 +29,7 @@ duration: 10min
     target="_blank"
     title="GitHub"
   >
-    <div class="bg-white rounded-[100%] b-2">
+    <div class="bg-white rounded-[100%]">
       <logos-github-icon />
     </div>
   </a>
@@ -87,10 +81,12 @@ Use the component in any slide:
 <animated-text text="Parisienne" font="parisienne" />
 ```
 
-<p><animated-text text="Caveat" font="caveat" /></p>
-<p><animated-text text="Italianno" font="italianno" /></p>
-<p><animated-text text="Tangerine" font="tangerine" /></p>
-<p><animated-text text="Parisienne" font="parisienne" /></p>
+<div class="text-4xl">
+<animated-text text="Caveat" font="caveat" /><br/>
+<animated-text text="Italianno" font="italianno" /><br/>
+<animated-text text="Tangerine" font="tangerine" /><br/>
+<animated-text text="Parisienne" font="parisienne" />
+</div>
 
 ---
 
@@ -103,6 +99,7 @@ Use the component in any slide:
   :speed="2"
   :loop="true"
   :delay="1"
+  text-4xl
 />
 ```
 
@@ -112,6 +109,7 @@ Use the component in any slide:
   :speed="2"
   :loop="true"
   :delay="1"
+  text-4xl
 />
 
 ---
@@ -119,22 +117,22 @@ Use the component in any slide:
 # Effects
 
 ```html
-<animated-text
-  text="Fancy effects"
-  font="parisienne"
-  font-size="100px"
-  :speed="3"
-  :effects="{ glow: { radius: 8, color: '#00ccff' }, gradient: { colors: 'rainbow' } }"
-/>
+  <animated-text
+    text="Fancy effects"
+    font="parisienne"
+    :speed="3"
+    :effects="{ glow: { radius: 8, color: '#00ccff' }, gradient: { colors: 'rainbow' } }"
+    class="text-[100px]"
+  />
 ```
 
-<animated-text
-  text="Fancy effects"
-  font="parisienne"
-  font-size="100px"
-  :speed="3"
-  :effects="{ glow: { radius: 8, color: '#00ccff' }, gradient: { colors: 'rainbow' } }"
-/>
+  <animated-text
+    class="text-[100px]"
+    text="Fancy effects"
+    font="parisienne"
+    :speed="3"
+    :effects="{ glow: { radius: 8, color: '#00ccff' }, gradient: { colors: 'rainbow' } }"
+  />
 
 ---
 

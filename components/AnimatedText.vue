@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
-import { TegakiEngine } from 'tegaki/core';
+import { computeTextLayout, TegakiEngine } from 'tegaki/core';
 import caveatBundle from 'tegaki/fonts/caveat';
 import italiannoBundle from 'tegaki/fonts/italianno';
 import parisienneBundle from 'tegaki/fonts/parisienne';
@@ -15,6 +15,8 @@ const FONT_SOURCES = {
   tangerine: { bundle: tangerineBundle, fontUrl: `${FONT_BASE_URL}tangerine.ttf` },
 };
 
+const TEGAKI_PAD_V = 'max(0.2em, 0.9em - 0.5lh)';
+
 const props = defineProps({
   text: {
     type: String,
@@ -23,10 +25,6 @@ const props = defineProps({
   font: {
     type: String,
     default: 'caveat',
-  },
-  fontSize: {
-    type: String,
-    default: '48px',
   },
   speed: {
     type: Number,
@@ -71,6 +69,7 @@ const props = defineProps({
 });
 
 const wrapperRef = ref();
+const layerRef = ref();
 const containerRef = ref();
 const mounted = ref(false);
 let engine = null;
@@ -84,6 +83,12 @@ const resolvedFont = computed(() => {
     ...source.bundle,
     fontUrl: source.fontUrl,
   };
+});
+
+const resolvedFontFamily = computed(() => {
+  if (resolvedFont.value.fullFamily)
+    return `'${resolvedFont.value.family}', '${resolvedFont.value.fullFamily}'`;
+  return `'${resolvedFont.value.family}'`;
 });
 
 const engineOptions = computed(() => ({
@@ -103,29 +108,54 @@ const engineOptions = computed(() => ({
   direction: props.direction,
 }));
 
-function applySlideScaleWorkaround() {
-  if (!wrapperRef.value) return;
+const placeholderStyle = computed(() => ({
+  fontFamily: resolvedFontFamily.value,
+  fontSize: 'inherit',
+  lineHeight: 'inherit',
+  display: 'inline-block',
+  padding: `${TEGAKI_PAD_V} 0.2em`,
+  whiteSpace: 'pre-wrap',
+  overflowWrap: 'break-word',
+  visibility: 'hidden',
+  pointerEvents: 'none',
+  userSelect: 'none',
+}));
 
-  // Slidev scales slides via CSS transform: scale(). This causes
-  // Range.getClientRects() — used by Tegaki to measure character positions —
-  // to return scaled visual coordinates, making the drawn text too wide.
-  // Applying an inverse scale to the wrapper ensures measurements inside it
-  // are always in unscaled layout coordinates.
-  // Note: --slidev-slide-scale is a calc() expression, so we extract the
-  // number with a regex instead of parseFloat.
-  const scaleVar = getComputedStyle(wrapperRef.value).getPropertyValue('--slidev-slide-scale');
-  const slideScale = parseFloat(scaleVar.match(/[\d.]+/)?.[0]) || 1;
-  const parentTextAlign = getComputedStyle(wrapperRef.value.parentElement ?? wrapperRef.value).textAlign;
-  const transformOrigin = parentTextAlign === 'center'
-    ? 'top center'
-    : parentTextAlign === 'right'
-      ? 'top right'
-      : 'top left';
+const layerStyle = {
+  position: 'absolute',
+  top: TEGAKI_PAD_V,
+  right: '0.2em',
+  bottom: TEGAKI_PAD_V,
+  left: '0.2em',
+  display: 'block',
+  overflow: 'visible',
+  pointerEvents: 'none',
+};
 
-  wrapperRef.value.style.display = 'inline-block';
-  wrapperRef.value.style.transform = `scale(${1 / slideScale})`;
-  wrapperRef.value.style.transformOrigin = transformOrigin;
-  wrapperRef.value.style.width = 'fit-content';
+function patchEngineLayoutMeasurement(instance) {
+  if (!instance._recomputeLayout)
+    return;
+
+  instance._recomputeLayout = function patchedRecomputeLayout() {
+    if (this._fontReady && this._font?.family && this._fontSize && this._containerWidth && this._text) {
+      const key = `${this._text}\0${this._font.family}\0${this._fontSize}\0${this._lineHeight}\0${this._containerWidth}\0${this._direction ?? ''}`;
+      if (key === this._layoutKey)
+        return;
+
+      this._layoutKey = key;
+      this._layout = computeTextLayout(
+        this._text,
+        this._fontSize,
+        resolvedFontFamily.value,
+        this._lineHeight,
+        this._containerWidth,
+      );
+    }
+    else {
+      this._layoutKey = '';
+      this._layout = null;
+    }
+  };
 }
 
 async function ensureFontLoaded(font) {
@@ -134,7 +164,9 @@ async function ensureFontLoaded(font) {
       return;
   }
 
-  const face = new FontFace(font.family, `url(${font.fontUrl})`);
+  const face = new FontFace(font.family, `url(${font.fontUrl})`, {
+    featureSettings: "'calt' 0, 'liga' 0",
+  });
   const loaded = await face.load();
   document.fonts.add(loaded);
 }
@@ -151,11 +183,12 @@ async function initEngine() {
 
   requestAnimationFrame(() => {
     initPending = false;
-    if (token !== initToken || !mounted.value || !containerRef.value || !wrapperRef.value) return;
+    if (token !== initToken || !mounted.value || !containerRef.value || !wrapperRef.value || !layerRef.value) return;
 
-    applySlideScaleWorkaround();
     engine?.destroy();
     engine = new TegakiEngine(containerRef.value, engineOptions.value);
+    patchEngineLayoutMeasurement(engine);
+    engine.update(engineOptions.value);
   });
 }
 
@@ -230,7 +263,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="wrapperRef">
-    <div ref="containerRef" :style="{ fontSize: props.fontSize }" />
-  </div>
+  <span ref="wrapperRef" style="position: relative; display: inline-block; max-width: 100%; vertical-align: baseline;">
+    <span :style="placeholderStyle" aria-hidden="true">{{ props.text }}</span>
+    <span ref="layerRef" :style="layerStyle">
+      <span ref="containerRef" style="font-size: inherit; line-height: inherit; display: block;" />
+    </span>
+  </span>
 </template>
