@@ -115,10 +115,16 @@ function applySlideScaleWorkaround() {
   // number with a regex instead of parseFloat.
   const scaleVar = getComputedStyle(wrapperRef.value).getPropertyValue('--slidev-slide-scale');
   const slideScale = parseFloat(scaleVar.match(/[\d.]+/)?.[0]) || 1;
+  const parentTextAlign = getComputedStyle(wrapperRef.value.parentElement ?? wrapperRef.value).textAlign;
+  const transformOrigin = parentTextAlign === 'center'
+    ? 'top center'
+    : parentTextAlign === 'right'
+      ? 'top right'
+      : 'top left';
 
   wrapperRef.value.style.display = 'inline-block';
   wrapperRef.value.style.transform = `scale(${1 / slideScale})`;
-  wrapperRef.value.style.transformOrigin = 'top left';
+  wrapperRef.value.style.transformOrigin = transformOrigin;
   wrapperRef.value.style.width = 'fit-content';
 }
 
