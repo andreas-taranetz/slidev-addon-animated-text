@@ -1,0 +1,39 @@
+{
+  "name": "slidev-addon-animated-text",
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.33.0",
+  "type": "module",
+  "description": "Slidev addon exposing a Tegaki-powered animated text component",
+  "keywords": [
+    "slidev-addon",
+    "slidev",
+    "tegaki",
+    "animation",
+    "handwriting"
+  ],
+  "files": [
+    "components",
+    "public",
+    "README.md"
+  ],
+  "publishConfig": {
+    "provenance": true
+  },
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "tegaki": "^0.13.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.14.2",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "vue": "^3.5.29"
+  }
+}
