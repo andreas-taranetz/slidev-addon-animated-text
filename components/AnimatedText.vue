@@ -22,6 +22,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  fontBundle: {
+    type: Object,
+    default: undefined,
+  },
   font: {
     type: String,
     default: 'caveat',
@@ -78,6 +82,9 @@ let visibilityFrame = 0;
 let initPending = false;
 
 const resolvedFont = computed(() => {
+  if (props.fontBundle)
+    return props.fontBundle;
+
   const source = FONT_SOURCES[props.font] ?? FONT_SOURCES.caveat;
   return {
     ...source.bundle,
@@ -228,7 +235,7 @@ onMounted(() => {
 });
 
 watch(
-  () => props.font,
+  () => [props.font, props.fontBundle],
   async () => {
     if (!mounted.value) return;
     if (!isVisible())

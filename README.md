@@ -42,6 +42,23 @@ Example:
 <animated-text text="Hello World!" font="italianno" />
 ```
 
+You can also pass any generated Tegaki font bundle via `font-bundle`:
+
+```html
+<script setup>
+import { onMounted, ref } from 'vue';
+import { loadTegakiBundle } from 'slidev-addon-animated-text/loadTegakiBundle';
+
+const comicNeueBundle = ref();
+
+onMounted(async () => {
+  comicNeueBundle.value = await loadTegakiBundle('comic-neue', 'Comic Neue');
+});
+</script>
+
+<animated-text v-if="comicNeueBundle" text="Hello World this fits" :font-bundle="comicNeueBundle" />
+```
+
 ## Props
 
 The component exposes the common Tegaki renderer options plus a few addon-level conveniences.
@@ -50,6 +67,7 @@ The component exposes the common Tegaki renderer options plus a few addon-level 
 | --- | --- | --- | --- |
 | `text` | `string` | required | Text to render |
 | `font` | `'caveat' \| 'italianno' \| 'tangerine' \| 'parisienne'` | `caveat` | Built-in Tegaki font bundle |
+| `font-bundle` | `object` | `undefined` | Custom Tegaki font bundle, overrides `font` |
 | `speed` | `number` | `1` | Simple playback speed control |
 | `loop` | `boolean` | `false` | Loop the animation |
 | `delay` | `number` | `0` | Delay before animation start in seconds |

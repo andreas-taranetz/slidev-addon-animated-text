@@ -13,6 +13,7 @@
   ],
   "files": [
     "components",
+    "loadTegakiBundle.ts",
     "public",
     "README.md"
   ],

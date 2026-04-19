@@ -90,6 +90,42 @@ Use the component in any slide:
 
 ---
 
+<script setup>
+import { onMounted, ref } from 'vue';
+import { loadTegakiBundle } from './loadTegakiBundle.ts';
+
+const comicNeueBundle = ref();
+
+onMounted(async () => {
+  comicNeueBundle.value = await loadTegakiBundle('comic-neue', 'Comic Neue');
+});
+</script>
+
+# Any Tegaki Font Bundle
+
+Download a bundle from the [Tegaki generator](https://gkurt.com/tegaki/generator/), keep the generated files in `public/comic-neue/`, and pass the loaded bundle via `font-bundle`.
+
+```html
+<script setup>
+import { loadTegakiBundle } from './loadTegakiBundle.ts';
+
+const comicNeueBundle = await loadTegakiBundle('comic-neue', 'Comic Neue');
+</script>
+
+<animated-text text="Hello World this fits" :font-bundle="comicNeueBundle" />
+```
+
+<div class="mt-8 text-6xl min-h-[2em]">
+  <animated-text
+    v-if="comicNeueBundle"
+    text="Hello World this fits"
+    :font-bundle="comicNeueBundle"
+    :speed="1.4"
+  />
+</div>
+
+---
+
 # Time Control
 
 ```html
