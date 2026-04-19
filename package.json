@@ -31,9 +31,10 @@
     "vue": "^3.5.0"
   },
   "devDependencies": {
+    "@iconify-json/logos": "^1.2.11",
     "@slidev/cli": "^52.14.2",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
-    "vue": "^3.5.29"
+    "vue": "^3.5.32"
   }
 }

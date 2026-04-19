@@ -1,14 +1,14 @@
 ---
 addons:
-  - /Users/andreas.taranetz/projects/slidev-addon-animated-text
+  - "@/"
 theme: default
 layout: center
+class: text-center
 title: Animated Text Addon
 info: |
   ## slidev-addon-animated-text
 
   Tegaki-powered animated handwriting text for Slidev.
-class: text-center
 transition: slide-left
 drawings:
   persist: false
@@ -16,26 +16,49 @@ comark: true
 duration: 10min
 ---
 
-<div>
+<h1>
   <animated-text
     text="Animated text"
     font-size="88px"
     :speed="2.3"
   />
+</h1>
 
-  <p class="text-lg opacity-75">
-    Tegaki-powered animated handwriting text for Slidev.
-  </p>
+<p class="text-lg">
+  Tegaki-powered animated text for Slidev.
+</p>
+
+<div class="mt-6 flex items-center justify-center gap-8 text-2xl">
+  <a
+    class="border-none!"
+    href="https://github.com/andreas-taranetz/slidev-addon-animated-text"
+    target="_blank"
+    title="GitHub"
+  >
+    <div class="bg-white rounded-[100%] b-2">
+      <logos-github-icon />
+    </div>
+  </a>
+  <a
+    class="border-none!"
+    href="https://www.npmjs.com/package/slidev-addon-animated-text"
+    target="_blank"
+    title="npm"
+  >
+    <logos-npm-icon />
+  </a>
 </div>
 
 ---
 
-# Add To Your Deck
+# How to add it to your slides
+
+Adjust depending on your package manager
 
 Install the addon:
 
 ```bash
-npm i slidev-addon-animated-text
+pnpm i slidev-addon-animated-text
 ```
 
 Register it in your `slides.md` frontmatter:
@@ -99,7 +122,8 @@ Use the component in any slide:
 <animated-text
   text="Fancy effects"
   font="parisienne"
-  font-size="56px"
+  font-size="100px"
+  :speed="3"
   :effects="{ glow: { radius: 8, color: '#00ccff' }, gradient: { colors: 'rainbow' } }"
 />
 ```
@@ -107,7 +131,8 @@ Use the component in any slide:
 <animated-text
   text="Fancy effects"
   font="parisienne"
-  font-size="56px"
+  font-size="100px"
+  :speed="3"
   :effects="{ glow: { radius: 8, color: '#00ccff' }, gradient: { colors: 'rainbow' } }"
 />
 
@@ -135,20 +160,4 @@ Use the component in any slide:
   :effects="{ glow: { radius: 6, color: '#7c3aed' }, pressureWidth: { strength: 0.8 } }"
 />
 
----
-
-# Advanced Time Override
-
-Use `time` only when you need Tegaki's full time-control API.
-
-```html
-<animated-text
-  text="Start late"
-  :time="{ mode: 'uncontrolled', initialTime: 0.4, delay: 0.3, speed: 1.2, loop: true }"
-/>
-```
-
-<animated-text
-  text="Start late"
-  :time="{ mode: 'uncontrolled', initialTime: 0.4, delay: 0.3, speed: 1.2, loop: true }"
-/>
+See all configuration options in the [Tegaki docs](https://gkurt.com/tegaki/)

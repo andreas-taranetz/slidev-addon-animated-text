@@ -39,9 +39,9 @@ jobs:
         run: pnpm build
 
       - name: Set package version from release tag
-        run: npm pkg set version="${RELEASE_TAG#v}"
+        run: pnpm pkg set version="${RELEASE_TAG#v}"
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
 
       - name: Publish package to npm
-        run: npm publish --provenance
+        run: pnpm publish --no-git-checks --provenance

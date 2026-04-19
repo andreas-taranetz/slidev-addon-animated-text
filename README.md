@@ -2,6 +2,8 @@
 
 Slidev addon exposing an `<animated-text>` component powered by [Tegaki](https://gkurt.com/tegaki/).
 
+See the example here [andreas-taranetz.github.io/slidev-addon-animated-text/](andreas-taranetz.github.io/slidev-addon-animated-text/)
+
 ## Install
 
 ```bash
@@ -96,7 +98,7 @@ Use the addon locally while developing it:
 ```yaml
 ---
 addons:
-  - ./
+  - "@/"
 ---
 ```
 
@@ -106,21 +108,5 @@ Then run:
 pnpm install
 pnpm dev
 ```
-
-## Publish
-
-This repo can publish from a GitHub release.
-
-1. In npm, configure this GitHub repository as a trusted publisher for `slidev-addon-animated-text`
-2. Push a tag like `v0.1.1`
-3. Create a GitHub release from that tag
-4. The `Publish` workflow will install with `pnpm`, build, sync the package version from the tag, and publish to npm with provenance
-
-For a one-off local publish:
-
-1. Login to npm: `npm login`
-2. Update `version` in `package.json` or run `npm version <patch|minor|major>`
-3. Verify the tarball with `pnpm pack --dry-run`
-4. Publish: `npm publish --provenance`
 
 The package publishes source files directly. Slidev compiles the addon when it is consumed.
