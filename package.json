@@ -16,8 +16,9 @@
     "public",
     "README.md"
   ],
-  "publishConfig": {
-    "provenance": true
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreas-taranetz/slidev-addon-animated-text.git"
   },
   "scripts": {
     "build": "slidev build",
