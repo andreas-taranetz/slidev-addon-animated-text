@@ -5,15 +5,17 @@ import caveatBundle from 'tegaki/fonts/caveat';
 import italiannoBundle from 'tegaki/fonts/italianno';
 import parisienneBundle from 'tegaki/fonts/parisienne';
 import tangerineBundle from 'tegaki/fonts/tangerine';
+import caveatFontUrl from '../fonts/caveat.ttf' with { type: 'url' };
+import italiannoFontUrl from '../fonts/italianno.ttf' with { type: 'url' };
+import parisienneFontUrl from '../fonts/parisienne.ttf' with { type: 'url' };
+import tangerineFontUrl from '../fonts/tangerine.ttf' with { type: 'url' };
 import { getDefaultFont, getFont } from '../fontRegistry.ts';
 
-const FONT_BASE_URL = `${import.meta.env.BASE_URL}fonts/`;
-
 const FONT_SOURCES = {
-  caveat: { bundle: caveatBundle, fontUrl: `${FONT_BASE_URL}caveat.ttf` },
-  italianno: { bundle: italiannoBundle, fontUrl: `${FONT_BASE_URL}italianno.ttf` },
-  parisienne: { bundle: parisienneBundle, fontUrl: `${FONT_BASE_URL}parisienne.ttf` },
-  tangerine: { bundle: tangerineBundle, fontUrl: `${FONT_BASE_URL}tangerine.ttf` },
+  caveat: { bundle: caveatBundle, fontUrl: caveatFontUrl },
+  italianno: { bundle: italiannoBundle, fontUrl: italiannoFontUrl },
+  parisienne: { bundle: parisienneBundle, fontUrl: parisienneFontUrl },
+  tangerine: { bundle: tangerineBundle, fontUrl: tangerineFontUrl },
 };
 
 const TEGAKI_PAD_V = 'max(0.2em, 0.9em - 0.5lh)';

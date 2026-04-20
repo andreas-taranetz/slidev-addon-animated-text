@@ -36,6 +36,8 @@ The component supports the built-in Tegaki font bundles via the `font` prop:
 - `tangerine`
 - `parisienne`
 
+These fonts are bundled with the addon, so they work when `slidev-addon-animated-text` is installed from another Slidev deck as well.
+
 Example:
 
 ```html

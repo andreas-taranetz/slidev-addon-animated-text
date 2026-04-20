@@ -13,8 +13,8 @@
   ],
   "files": [
     "components",
+    "fonts",
     "fontRegistry.ts",
-    "public",
     "README.md"
   ],
   "repository": {
