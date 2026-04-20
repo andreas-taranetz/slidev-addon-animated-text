@@ -79,7 +79,7 @@ The component exposes the common Tegaki renderer options plus a few addon-level 
 | `delay` | `number` | `0` | Delay before animation start in seconds |
 | `time` | `number \| object` | `undefined` | Advanced Tegaki time control override. Takes precedence over `speed`, `loop`, and `delay` |
 | `effects` | `object` | `undefined` | Tegaki effects config |
-| `quality` | `object` | `undefined` | Tegaki quality config |
+| `quality` | `object` | `{ pixelRatio: 2 }` | Tegaki quality config. The addon defaults to 2x supersampling for sharper canvas text |
 | `timing` | `object` | `undefined` | Tegaki timing config |
 | `show-overlay` | `boolean` | `false` | Shows the text overlay for debugging |
 | `on-complete` | `function` | `undefined` | Completion callback |
@@ -111,6 +111,17 @@ Explicit font override:
   :effects="{ glow: { radius: 8, color: '#00ccff' }, gradient: { colors: 'rainbow' } }"
 />
 ```
+
+Sharpen or relax Tegaki's canvas rendering quality:
+
+```html
+<animated-text
+  text="Sharper text"
+  :quality="{ pixelRatio: 3 }"
+/>
+```
+
+`pixelRatio` increases the internal canvas resolution. Higher values usually look crisper, but they also cost more GPU/CPU time.
 
 Advanced `time` override example:
 

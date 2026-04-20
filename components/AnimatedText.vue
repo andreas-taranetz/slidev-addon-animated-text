@@ -19,6 +19,9 @@ const FONT_SOURCES = {
 };
 
 const TEGAKI_PAD_V = 'max(0.2em, 0.9em - 0.5lh)';
+const DEFAULT_QUALITY = {
+  pixelRatio: 2,
+};
 
 const props = defineProps({
   text: {
@@ -117,7 +120,10 @@ const engineOptions = computed(() => ({
     delay: props.delay,
   },
   effects: props.effects,
-  quality: props.quality,
+  quality: {
+    ...DEFAULT_QUALITY,
+    ...props.quality,
+  },
   timing: props.timing,
   showOverlay: props.showOverlay,
   onComplete: props.onComplete,
