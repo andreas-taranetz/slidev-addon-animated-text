@@ -5,6 +5,7 @@ import caveatBundle from 'tegaki/fonts/caveat';
 import italiannoBundle from 'tegaki/fonts/italianno';
 import parisienneBundle from 'tegaki/fonts/parisienne';
 import tangerineBundle from 'tegaki/fonts/tangerine';
+import { getDefaultFont, getFont } from '../fontRegistry.ts';
 
 const FONT_BASE_URL = `${import.meta.env.BASE_URL}fonts/`;
 
@@ -28,7 +29,7 @@ const props = defineProps({
   },
   font: {
     type: String,
-    default: 'caveat',
+    default: undefined,
   },
   speed: {
     type: Number,
@@ -85,7 +86,13 @@ const resolvedFont = computed(() => {
   if (props.fontBundle)
     return props.fontBundle;
 
-  const source = FONT_SOURCES[props.font] ?? FONT_SOURCES.caveat;
+  const fontName = props.font ?? getDefaultFont() ?? 'caveat';
+
+  const registeredFont = getFont(fontName);
+  if (registeredFont)
+    return registeredFont;
+
+  const source = FONT_SOURCES[fontName] ?? FONT_SOURCES.caveat;
   return {
     ...source.bundle,
     fontUrl: source.fontUrl,

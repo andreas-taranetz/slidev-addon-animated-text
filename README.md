@@ -42,22 +42,26 @@ Example:
 <animated-text text="Hello World!" font="italianno" />
 ```
 
-You can also pass any generated Tegaki font bundle via `font-bundle`:
+You can also register any [generated Tegaki](https://gkurt.com/tegaki/generator/) font bundle from your own deck and use it through the `font` prop, or set it as the new default using `setDefaultFont`:
 
 ```html
-<script setup>
-import { onMounted, ref } from 'vue';
-import { loadTegakiBundle } from 'slidev-addon-animated-text/loadTegakiBundle';
+// setup/main.ts
+import { defineAppSetup } from '@slidev/types';
+import comicNeueBundle from './comic-neue/bundle.ts';
+import { registerFontBundle, setDefaultFont } from 'slidev-addon-animated-text/fontRegistry';
 
-const comicNeueBundle = ref();
-
-onMounted(async () => {
-  comicNeueBundle.value = await loadTegakiBundle('comic-neue', 'Comic Neue');
+export default defineAppSetup(() => {
+  registerFontBundle('comic-neue', comicNeueBundle);
+  setDefaultFont('comic-neue');
 });
-</script>
-
-<animated-text v-if="comicNeueBundle" text="Hello World this fits" :font-bundle="comicNeueBundle" />
 ```
+
+```
+// slides.md
+<animated-text text="Hello World"/>
+```
+
+The generated bundle files stay in your Slidev project, for example under `./comic-neue/`.
 
 ## Props
 
@@ -66,7 +70,7 @@ The component exposes the common Tegaki renderer options plus a few addon-level 
 | Prop | Type | Default | Notes |
 | --- | --- | --- | --- |
 | `text` | `string` | required | Text to render |
-| `font` | `'caveat' \| 'italianno' \| 'tangerine' \| 'parisienne'` | `caveat` | Built-in Tegaki font bundle |
+| `font` | `string` | configured default or `caveat` | Built-in or registered Tegaki font bundle name |
 | `font-bundle` | `object` | `undefined` | Custom Tegaki font bundle, overrides `font` |
 | `speed` | `number` | `1` | Simple playback speed control |
 | `loop` | `boolean` | `false` | Loop the animation |
@@ -80,6 +84,12 @@ The component exposes the common Tegaki renderer options plus a few addon-level 
 | `direction` | `string` | `undefined` | Text direction |
 
 ## Examples
+
+Explicit font override:
+
+```html
+<animated-text text="Hello World this fits" font="comic-neue" />
+```
 
 ```html
 <h2 style="font-size: 56px; line-height: 1;">

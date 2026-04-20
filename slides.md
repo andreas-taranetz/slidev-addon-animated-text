@@ -16,7 +16,8 @@ comark: true
 duration: 10min
 ---
 
-# <animated-text text="Animated text" :speed="2.3" />
+# <animated-text text="Animated text" :speed="2.3" font="caveat" />
+<!-- Specify caveat since the default font was overridden -->
 
 <p class="text-lg">
   Tegaki-powered animated text for Slidev.
@@ -70,6 +71,9 @@ Use the component in any slide:
 <animated-text text="Hello World!" />
 ```
 
+<animated-text text="Hello World!" font="caveat"/>
+<!-- Specify caveat since the default font was overridden -->
+
 ---
 
 # Built-In Fonts
@@ -90,39 +94,34 @@ Use the component in any slide:
 
 ---
 
-<script setup>
-import { onMounted, ref } from 'vue';
-import { loadTegakiBundle } from './loadTegakiBundle.ts';
+# Use any font
 
-const comicNeueBundle = ref();
+Generate a bundle using the [Tegaki generator](https://gkurt.com/tegaki/generator/) and store the unzipped generator output in your project.
 
-onMounted(async () => {
-  comicNeueBundle.value = await loadTegakiBundle('comic-neue', 'Comic Neue');
+For example `comic-neue/` contains: `bundle.ts`, `glyphData.json`, and `comic-neue.ttf`.
+
+Register the new font in the `setup/main.ts` and used it in your slides with the `animated-text` component.
+
+```typescript {3-4,7-8}
+// setup/main.ts
+import { defineAppSetup } from '@slidev/types';
+import comicNeueBundle from './comic-neue/bundle.ts';
+import { registerFontBundle, setDefaultFont } from 'slidev-addon-animated-text/fontRegistry';
+
+export default defineAppSetup(() => {
+  registerFontBundle('comic-neue', comicNeueBundle);
+  setDefaultFont('comic-neue');
 });
-</script>
-
-# Any Tegaki Font Bundle
-
-Download a bundle from the [Tegaki generator](https://gkurt.com/tegaki/generator/), keep the generated files in `public/comic-neue/`, and pass the loaded bundle via `font-bundle`.
-
-```html
-<script setup>
-import { loadTegakiBundle } from './loadTegakiBundle.ts';
-
-const comicNeueBundle = await loadTegakiBundle('comic-neue', 'Comic Neue');
-</script>
-
-<animated-text text="Hello World this fits" :font-bundle="comicNeueBundle" />
 ```
 
-<div class="mt-8 text-6xl min-h-[2em]">
-  <animated-text
-    v-if="comicNeueBundle"
-    text="Hello World this fits"
-    :font-bundle="comicNeueBundle"
-    :speed="1.4"
-  />
-</div>
+```tsx
+// slides.md
+<animated-text text="Any font can be animated" />
+```
+
+<p class="text-6xl">
+  <animated-text text="Any font can be animated" :speed="3" />
+</p>
 
 ---
 
