@@ -21,6 +21,7 @@
     "type": "git",
     "url": "https://github.com/andreas-taranetz/slidev-addon-animated-text.git"
   },
+  "license": "MIT",
   "homepage": "https://andreas-taranetz.github.io/slidev-addon-animated-text",
   "scripts": {
     "build": "slidev build",
