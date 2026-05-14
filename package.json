@@ -1,45 +1,43 @@
 {
   "name": "slidev-addon-animated-text",
   "version": "0.1.0",
-  "packageManager": "pnpm@10.33.0",
-  "type": "module",
   "description": "Slidev addon exposing a Tegaki-powered animated text component",
   "keywords": [
-    "slidev-addon",
-    "slidev",
-    "tegaki",
     "animation",
-    "handwriting"
+    "handwriting",
+    "slidev",
+    "slidev-addon",
+    "tegaki"
   ],
+  "homepage": "https://andreas-taranetz.github.io/slidev-addon-animated-text",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreas-taranetz/slidev-addon-animated-text.git"
+  },
   "files": [
     "components",
     "fonts",
     "fontRegistry.ts",
     "README.md"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/andreas-taranetz/slidev-addon-animated-text.git"
-  },
-  "license": "MIT",
-  "homepage": "https://andreas-taranetz.github.io/slidev-addon-animated-text",
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
     "export": "slidev export"
   },
   "dependencies": {
-    "tegaki": "^0.13.0"
-  },
-  "peerDependencies": {
-    "vue": "^3.5.0"
+    "tegaki": "^0.17.0"
   },
   "devDependencies": {
     "@iconify-json/logos": "^1.2.11",
     "@slidev/cli": "^52.14.2",
-    "@slidev/types": "^52.14.2",
     "@slidev/theme-default": "latest",
-    "@slidev/theme-seriph": "latest",
+    "@slidev/types": "^52.14.2",
     "vue": "^3.5.32"
-  }
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "packageManager": "pnpm@10.33.0"
 }

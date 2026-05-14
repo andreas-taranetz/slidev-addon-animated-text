@@ -160,7 +160,7 @@ export default defineAppSetup(() => {
     text="Fancy effects"
     font="parisienne"
     :speed="3"
-    :effects="{ glow: { radius: 8, color: '#00ccff' }, gradient: { colors: 'rainbow' } }"
+    :effects="{ glow: { radius: 6, color: '#ccc' }, globalGradient: { colors: ['#f00', '#0f0','#00f'] } }"
     class="text-[100px]"
   />
 ```
@@ -170,7 +170,7 @@ export default defineAppSetup(() => {
     text="Fancy effects"
     font="parisienne"
     :speed="3"
-    :effects="{ glow: { radius: 8, color: '#00ccff' }, gradient: { colors: 'rainbow' } }"
+    :effects="{ glow: { radius: 6, color: '#ccc' }, globalGradient: { colors: ['#f00', '#0f0','#00f'] } }"
   />
 
 ---

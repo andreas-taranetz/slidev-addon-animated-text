@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       tegaki:
-        specifier: ^0.13.0
-        version: 0.13.0(vue@3.5.32(typescript@5.9.3))
+        specifier: ^0.17.0
+        version: 0.17.1(@nuxt/kit@3.21.2)(vue@3.5.32(typescript@5.9.3))
     devDependencies:
       '@iconify-json/logos':
         specifier: ^1.2.11
@@ -19,9 +19,6 @@ importers:
         specifier: ^52.14.2
         version: 52.14.2(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@nuxt/kit@3.21.2)(@types/markdown-it@14.1.2)(@types/node@22.19.17)(@vue/compiler-sfc@3.5.32)(markdown-it@14.1.1)(postcss@8.5.10)
       '@slidev/theme-default':
-        specifier: latest
-        version: 0.25.0
-      '@slidev/theme-seriph':
         specifier: latest
         version: 0.25.0
       '@slidev/types':
@@ -805,10 +802,6 @@ packages:
 
   '@slidev/theme-default@0.25.0':
     resolution: {integrity: sha512-iWvthH1Ny+i6gTwRnEeeU+EiqsHC56UdEO45bqLSNmymRAOWkKUJ/M0o7iahLzHSXsiPu71B7C715WxqjXk2hw==}
-    engines: {node: '>=14.0.0', slidev: '>=v0.47.0'}
-
-  '@slidev/theme-seriph@0.25.0':
-    resolution: {integrity: sha512-PnFQbn4I70+/cVie5iAr0Im6sYvnwjkO7Yj5KonTyJZFFJFytckLTrD3ijft/J4cRnz7OmSzTyQKNX1FN/x0YQ==}
     engines: {node: '>=14.0.0', slidev: '>=v0.47.0'}
 
   '@slidev/types@0.47.5':
@@ -2483,14 +2476,20 @@ packages:
     resolution: {integrity: sha512-WZzIx3rC1CvbMDloLsVw0lkZVKJWbrkJ0k1ghKFmcnPrW1+jWbgTkTEWVtD9lMdmI4jZEz40+naBxl1dCUhXXw==}
     engines: {node: '>=14.16'}
 
-  tegaki@0.13.0:
-    resolution: {integrity: sha512-CLNxDPfcxMtko0kR/9rNPZViBQSxyLFC1yBGKNO9XXoDyCUzrbspc72s0jC4WmA826/7k/nPAbtK8r44r0iOKQ==}
+  tegaki@0.17.1:
+    resolution: {integrity: sha512-KhCl5I//xstclHVaBC8+IVjPDWQ7RoDL0gEcVLZz+coH1DCTC5VH0EypN2Cj+GS8JXHRGB51MkJQrfZ1XnAxiw==}
     peerDependencies:
+      '@nuxt/kit': ^3.0.0 || ^4.0.0
+      harfbuzzjs: ^0.10.3
       react: '>=18'
       solid-js: '>=1'
       svelte: '>=5'
       vue: '>=3'
     peerDependenciesMeta:
+      '@nuxt/kit':
+        optional: true
+      harfbuzzjs:
+        optional: true
       react:
         optional: true
       solid-js:
@@ -3721,12 +3720,6 @@ snapshots:
       roughjs: 4.6.6
 
   '@slidev/theme-default@0.25.0':
-    dependencies:
-      '@slidev/types': 0.47.5
-      codemirror-theme-vars: 0.1.2
-      prism-theme-vars: 0.2.5
-
-  '@slidev/theme-seriph@0.25.0':
     dependencies:
       '@slidev/types': 0.47.5
       codemirror-theme-vars: 0.1.2
@@ -5794,8 +5787,9 @@ snapshots:
       function-timeout: 0.1.1
       time-span: 5.1.0
 
-  tegaki@0.13.0(vue@3.5.32(typescript@5.9.3)):
+  tegaki@0.17.1(@nuxt/kit@3.21.2)(vue@3.5.32(typescript@5.9.3)):
     optionalDependencies:
+      '@nuxt/kit': 3.21.2
       vue: 3.5.32(typescript@5.9.3)
 
   time-span@5.1.0:
