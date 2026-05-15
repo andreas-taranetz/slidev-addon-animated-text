@@ -104,7 +104,7 @@ Generate a bundle using the [Tegaki generator](https://gkurt.com/tegaki/generato
 
 For example `comic-neue/` contains: `bundle.ts`, `glyphData.json`, and `comic-neue.ttf`.
 
-Register the new font in the `setup/main.ts` and used it in your slides with the `animated-text` component.
+Register the new font in the `setup/main.ts` and optionally set it as default.
 
 ```typescript {3-4,7-8}
 // setup/main.ts
